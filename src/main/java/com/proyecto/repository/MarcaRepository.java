@@ -15,7 +15,7 @@ public interface MarcaRepository extends JpaRepository<Marca, Integer>{
 	public List<Marca> listaMarcaPorPais(
 			String nombre, String descripcion,String certificado, int idPais, int estado);
 	
-	@Query("select x from Marca x where( x.nombre like ?1) and x.estado = 1")
+	@Query("select x from Marca x where( x.nombre like ?1)")
 	public List<Marca> listaPorNombreLike(String nombre);
 	
 	
