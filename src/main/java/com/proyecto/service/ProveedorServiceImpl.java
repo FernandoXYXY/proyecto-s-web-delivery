@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.proyecto.entidad.Marca;
 import com.proyecto.entidad.Proveedor;
 import com.proyecto.repository.ProveedorRepository;
 
@@ -37,6 +38,16 @@ public class ProveedorServiceImpl implements ProveedorService{
 	public Proveedor insertaActualizaProveedor(Proveedor proveedor) {
 		// TODO Auto-generated method stub
 		return reposi.save(proveedor);
+	}
+	@Override
+	public void eliminaProveedor(int id) {
+		reposi.deleteById(id);
+		
+	}
+	@Override
+	public Proveedor buscaProveedor(int id) {
+		// TODO Auto-generated method stub
+		return reposi.buscaProveedor(id);
 	}
 	
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.util.Constantes;
+import com.proyecto.entidad.Marca;
 import com.proyecto.entidad.Proveedor;
 import com.proyecto.service.ProveedorService;
 import com.proyecto.util.AppSettings;
@@ -140,4 +142,34 @@ public class ProveedorController {
 		}
 		return ResponseEntity.ok(lista);
 	}
+	
+	
+	
+
+	@DeleteMapping("/eliminaProveedor/{id}")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> eliminaProveedor(@PathVariable("id")int id) {
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			
+			Proveedor opt=proveedorService.buscaProveedor(id);
+			
+			if (opt !=null) {
+				proveedorService.eliminaProveedor(id);
+				Proveedor x=proveedorService.buscaProveedor(id);
+				if (x==null) {
+					salida.put("mensaje", Constantes.MENSAJE_ELI_EXITOSO);
+				} else {
+					salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);
+				}
+			}else {
+				salida.put("mensaje", Constantes.MENSAJE_ELI_NO_EXISTE_ID);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);
+		}
+		return ResponseEntity.ok(salida);
+	}
+
 }

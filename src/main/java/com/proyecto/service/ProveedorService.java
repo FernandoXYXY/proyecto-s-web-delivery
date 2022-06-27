@@ -2,6 +2,7 @@ package com.proyecto.service;
 
 import java.util.List;
 
+import com.proyecto.entidad.Marca;
 import com.proyecto.entidad.Proveedor;
 
 public interface ProveedorService {
@@ -17,4 +18,7 @@ public interface ProveedorService {
 	
 	public abstract Proveedor insertaActualizaProveedor(Proveedor proveedor);
 	public abstract List<Proveedor> listaPorRazonSocialLike(String razonsocial);
+	
+	public abstract void eliminaProveedor(int id);
+    public abstract Proveedor buscaProveedor(int id);
 }
