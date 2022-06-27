@@ -156,8 +156,8 @@ public class ClienteController {
 			Optional<Cliente> opt = clienteService.buscaCliente(id);
 			if (opt.isPresent()) {
 				clienteService.eliminaCliente(id);
-				Optional<Cliente> optCliente = clienteService.buscaCliente(id);
-				if (optCliente.isEmpty()) {
+				opt = clienteService.buscaCliente(id);
+				if (opt.isEmpty()) {
 					salida.put("mensaje", Constantes.MENSAJE_ELI_EXITOSO);
 				} else {
 					salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);

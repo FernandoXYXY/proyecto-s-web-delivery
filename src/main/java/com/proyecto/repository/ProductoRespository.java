@@ -15,7 +15,7 @@ public interface ProductoRespository extends JpaRepository<Producto, Integer>{
 			+ "and ( ?4 is -1 or p.pais.idPais = ?4) and p.estado = ?5")
 	public  List<Producto> listaproductoporparmetros(String nombre, String serie, int idMarca, int idPais, int estado );
  
-	@Query("select p from Producto p where( p.nombre like ?1) and p.estado = 1")
+	@Query("select p from Producto p where( p.nombre like ?1)")
 	public List<Producto> listaProductopornombre(String nombre);
 	
 	

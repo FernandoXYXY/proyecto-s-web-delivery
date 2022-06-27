@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.proyecto.entidad.Producto;
-import com.proyecto.entidad.Sede;
 import com.proyecto.service.ProductoService;
 import com.proyecto.util.AppSettings;
 import com.proyecto.util.Constantes;
@@ -115,6 +114,7 @@ public ResponseEntity<Map<String, Object>> insetarProducto(@RequestBody Producto
 	Map<String, Object> salida = new HashMap<>();
 	try {
 		obj.setIdProducto(0);
+		obj.setEstado(1);
 		Producto objSalida =  productoservice.insetaractualizarproducto(obj);
 		if (objSalida == null) {
 			salida.put("mensaje", Constantes.MENSAJE_REG_ERROR);
@@ -128,11 +128,10 @@ public ResponseEntity<Map<String, Object>> insetarProducto(@RequestBody Producto
 	return ResponseEntity.ok(salida);
 }
 
-@PutMapping
+@PutMapping("/actualizaProducto")
 @ResponseBody
 public ResponseEntity<Map<String, Object>> actualizaProducto(@RequestBody Producto obj) {
 	Map<String, Object> salida = new HashMap<>();
-	obj.setEstado(1);
 	obj.setFechaRegistro(new Date());
 	try {
 		Producto objSalida =  productoservice.insetaractualizarproducto(obj);
@@ -149,25 +148,26 @@ public ResponseEntity<Map<String, Object>> actualizaProducto(@RequestBody Produc
 }
 
 
-@DeleteMapping("/eliminarProducto/{idProducto}")
+@DeleteMapping("/eliminarProducto/{id}")
 @ResponseBody
-public ResponseEntity<Map<String, Object>> eliminarProducto(@PathVariable("idProducto") int cod){
+public ResponseEntity<Map<String, Object>> eliminarProducto(@PathVariable("id") int id){
 	Map<String, Object> salida = new HashMap<String, Object>();
 	try {
-		
-		Producto obj = productoservice.findByIdProducto(cod);
-		
-		obj.setEstado(0);
-		obj.setFechaRegistro(new Date());
-		Producto objSalida = productoservice.insetaractualizarproducto(obj);
-		if(objSalida == null) {
-			salida.put("mensaje", "Ocurrio un error, no se elimino");
+		Optional<Producto> opt = productoservice.buscaProducto(id);
+		if (opt.isPresent()) {
+			productoservice.eliminaProducto(id);
+			Optional<Producto> optProducto = productoservice.buscaProducto(id);
+			if (optProducto.isEmpty()) {
+				salida.put("mensaje", Constantes.MENSAJE_ELI_EXITOSO);
+			} else {
+				salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);
+			}
 		}else {
-			salida.put("mensaje", "Se elimino correctamente");
+			salida.put("mensaje", Constantes.MENSAJE_ELI_NO_EXISTE_ID);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();
-		salida.put("mensaje", "Opps! Algo salio mal, no se elimino. Consulte con soporte");
+		salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);
 	}
 	
 	return ResponseEntity.ok(salida);

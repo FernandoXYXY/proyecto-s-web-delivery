@@ -1,10 +1,10 @@
 package com.proyecto.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import com.proyecto.entidad.Producto;
 import com.proyecto.repository.ProductoRespository;
@@ -50,6 +50,17 @@ public class ProductoServiceImpl implements ProductoService {
 	public Producto findByIdProducto(int cod) {
 		// TODO Auto-generated method stub
 		return repository.findByIdProducto(cod);
+	}
+	/*c*/
+	@Override
+	public void eliminaProducto(int id) {
+		repository.deleteById(id);
+	}
+
+
+	@Override
+	public Optional<Producto> buscaProducto(int id) {
+		return repository.findById(id);
 	}
 
 	
