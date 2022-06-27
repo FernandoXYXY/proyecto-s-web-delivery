@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.proyecto.entidad.Reclamo;
-import com.proyecto.entidad.Sede;
 import com.proyecto.service.ReclamoService;
 import com.proyecto.util.AppSettings;
-import com.proyecto.util.Constantes;
+
 
 @RestController
 @RequestMapping("/url/reclamo")
@@ -125,7 +123,7 @@ public class ReclamoController {
 	public ResponseEntity<Map<String, Object>> eliminaReclamo(@PathVariable("id") int id){
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			Reclamo r = serviceReclamo.buscarPorId(id).orElse(null);
+			Reclamo r = serviceReclamo.buscarPorId(id);
 			if(r != null){
 				r.setEstado(0);
 				serviceReclamo.eliminarReclamo(r);

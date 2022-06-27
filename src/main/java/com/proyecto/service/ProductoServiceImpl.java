@@ -1,7 +1,7 @@
 package com.proyecto.service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,9 +47,8 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public Producto findByIdProducto(int cod) {
-		// TODO Auto-generated method stub
-		return repository.findByIdProducto(cod);
+	public Producto buscaProducto(int id) {
+		return repository.buscaProducto(id);
 	}
 	/*c*/
 	@Override
@@ -57,11 +56,6 @@ public class ProductoServiceImpl implements ProductoService {
 		repository.deleteById(id);
 	}
 
-
-	@Override
-	public Optional<Producto> buscaProducto(int id) {
-		return repository.findById(id);
-	}
 
 	
 

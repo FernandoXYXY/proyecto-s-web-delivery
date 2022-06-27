@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.proyecto.entidad.Marca;
 import com.proyecto.repository.MarcaRepository;
 
@@ -52,8 +53,8 @@ public class MarcaServiceImpl implements MarcaService {
 	}
 
 	@Override
-	public Optional<Marca> buscaMarca(int id) {
-		return Repository.findById(id);
+	public Marca buscaMarca(int id) {
+		return Repository.buscaMarca(id);
 	}
 	
 	

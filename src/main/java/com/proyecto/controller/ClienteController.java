@@ -4,10 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -153,11 +151,11 @@ public class ClienteController {
 	public ResponseEntity<Map<String, Object>> eliminaDocente(@PathVariable("id")int id) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			Optional<Cliente> opt = clienteService.buscaCliente(id);
-			if (opt.isPresent()) {
+			Cliente opt = clienteService.buscaCliente(id);
+			if (opt !=null) {
 				clienteService.eliminaCliente(id);
-				opt = clienteService.buscaCliente(id);
-				if (opt.isEmpty()) {
+				Cliente optCliente= clienteService.buscaCliente(id);
+				if (optCliente==null) {
 					salida.put("mensaje", Constantes.MENSAJE_ELI_EXITOSO);
 				} else {
 					salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);

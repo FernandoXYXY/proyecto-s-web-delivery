@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import com.proyecto.entidad.Sede;
 
@@ -23,7 +22,8 @@ public interface RegistroSedeRepository extends JpaRepository<Sede, Integer>{
 			+ "?1 is '' or s.nombre like ?1")
 	public abstract List<Sede> listarSedePorNombte(String nombre);
 	
-  
+	@Query("select x from Sede x where x.id = ?1")
+	public Sede buscaSede(int id);
 	
  
 }

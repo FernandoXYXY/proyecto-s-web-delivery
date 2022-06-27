@@ -3,7 +3,7 @@ package com.proyecto.service;
 import java.util.List;
 import java.util.Optional;
 
-
+import com.proyecto.entidad.Cliente;
 import com.proyecto.entidad.Marca;
 
 
@@ -24,7 +24,7 @@ public interface MarcaService {
     //public abstract Marca findByIdMarca(int cod);
     
     public abstract void eliminaMarca(int id);
-	public abstract Optional<Marca> buscaMarca(int id);
+    public abstract Marca buscaMarca(int id);
     
 	
 

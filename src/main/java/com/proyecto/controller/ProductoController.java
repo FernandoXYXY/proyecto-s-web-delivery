@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.proyecto.entidad.Producto;
 import com.proyecto.service.ProductoService;
 import com.proyecto.util.AppSettings;
@@ -153,11 +153,12 @@ public ResponseEntity<Map<String, Object>> actualizaProducto(@RequestBody Produc
 public ResponseEntity<Map<String, Object>> eliminarProducto(@PathVariable("id") int id){
 	Map<String, Object> salida = new HashMap<String, Object>();
 	try {
-		Optional<Producto> opt = productoservice.buscaProducto(id);
-		if (opt.isPresent()) {
+		Producto opt=productoservice.buscaProducto(id);
+		
+		if (opt !=null) {
 			productoservice.eliminaProducto(id);
-			Optional<Producto> optProducto = productoservice.buscaProducto(id);
-			if (optProducto.isEmpty()) {
+			Producto optProducto=productoservice.buscaProducto(id);
+			if (optProducto==null) {
 				salida.put("mensaje", Constantes.MENSAJE_ELI_EXITOSO);
 			} else {
 				salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);

@@ -2,7 +2,6 @@ package com.proyecto.service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,10 +39,10 @@ public class ReclamoServiceImpl implements ReclamoService{
 	public void eliminarReclamo(Reclamo reclamo) {
 		repository.save(reclamo);
 	}
-
+	
 	@Override
-	public Optional<Reclamo> buscarPorId(int id) {
-		return repository.findById(id);
+	public Reclamo buscarPorId(int id) {
+		return repository.buscarPorId(id);
 	}
 
 }

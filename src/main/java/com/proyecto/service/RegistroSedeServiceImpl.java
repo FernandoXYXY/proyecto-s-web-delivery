@@ -55,9 +55,8 @@ public class RegistroSedeServiceImpl implements RegistroSedeService{
 	}
 
 	@Override
-	public Optional<Sede> buscarSede(int id) {
-		// TODO Auto-generated method stub
-		return repository.findById(id);
+	public Sede buscaSede(int id) {
+		return repository.buscaSede(id);
 	}
 
 }

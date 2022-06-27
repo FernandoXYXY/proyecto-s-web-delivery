@@ -19,6 +19,7 @@ public interface ProductoRespository extends JpaRepository<Producto, Integer>{
 	public List<Producto> listaProductopornombre(String nombre);
 	
 	
-	public Producto findByIdProducto(int cod);
+	@Query("select x from Producto x where x.id = ?1")
+	public Producto buscaProducto(int id);
 	
 }

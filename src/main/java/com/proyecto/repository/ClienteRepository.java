@@ -20,5 +20,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 	
 	@Query("select c from Cliente c where c.nombres like ?1")
 	public List<Cliente> listaClientePorNombre(String nombres);
+	
+	@Query("select x from Cliente x where x.id = ?1")
+	public Cliente buscaCliente(int id);
 
 }

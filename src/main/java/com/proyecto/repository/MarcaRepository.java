@@ -21,5 +21,8 @@ public interface MarcaRepository extends JpaRepository<Marca, Integer>{
 	
 	//public Marca findByIdMarca(int cod);
 	
+	@Query("select x from Marca x where x.id = ?1")
+	public Marca buscaMarca(int id);
+	
 
 }

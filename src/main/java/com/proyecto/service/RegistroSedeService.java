@@ -1,8 +1,6 @@
 package com.proyecto.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import com.proyecto.entidad.Sede;
 
 public interface RegistroSedeService {
@@ -15,6 +13,6 @@ public interface RegistroSedeService {
 	public abstract Sede insertaActualizaSede(Sede obj);
 	public abstract List<Sede> listarSedePorNombre(String nombre);
 	public abstract void eliminaSede(int id);
-	public abstract Optional<Sede> buscarSede(int id);
+	 public abstract Sede buscaSede(int id);
 	
 }

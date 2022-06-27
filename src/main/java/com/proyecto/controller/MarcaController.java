@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -164,12 +163,12 @@ public class MarcaController {
 			Map<String, Object> salida = new HashMap<>();
 			try {
 				
-				Optional<Marca> opt = marcaService.buscaMarca(id);
+				Marca opt=marcaService.buscaMarca(id);
 				
-				if (opt.isPresent()) {
+				if (opt !=null) {
 					marcaService.eliminaMarca(id);
-					Optional<Marca> optMarca = marcaService.buscaMarca(id);
-					if (optMarca.isEmpty()) {
+					Marca optMarca=marcaService.buscaMarca(id);
+					if (optMarca==null) {
 						salida.put("mensaje", Constantes.MENSAJE_ELI_EXITOSO);
 					} else {
 						salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);

@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -159,11 +158,11 @@ public class SedeController {
 	public ResponseEntity<Map<String, Object>> eliminaSede(@PathVariable("id")int id){
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			Optional<Sede> opt = registroSedeService.buscarSede(id);
-			if(opt.isPresent()){
+			Sede opt= registroSedeService.buscaSede(id);
+			if(opt!=null){
 				registroSedeService.eliminaSede(id);
-				opt = registroSedeService.buscarSede(id);
-				if(opt.isEmpty()) {
+				Sede optSede=registroSedeService.buscaSede(id);
+				if(optSede==null) {
 					salida.put("mensaje", Constantes.MENSAJE_ELI_EXITOSO);
 				}else {
 					salida.put("mensaje", Constantes.MENSAJE_ELI_ERROR);
