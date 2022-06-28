@@ -145,7 +145,7 @@ public class ProveedorController {
 	
 	
 	
-
+//eliminar
 	@DeleteMapping("/eliminaProveedor/{id}")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> eliminaProveedor(@PathVariable("id")int id) {
